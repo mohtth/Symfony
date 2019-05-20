@@ -32,44 +32,65 @@ class Article
      */
     private $category;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return Article
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     * @return Article
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
 
+    /**
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * @param Category|null $category
+     * @return Article
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
         return $this;
     }
 }
