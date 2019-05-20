@@ -94,12 +94,11 @@ class BlogController extends AbstractController
      */
     public function showByCategory(string $categoryName) : Response
     {
-        $category = $this->getDoctrine()
-            ->getRepository(Category::class)
-            ->findOneBy(['name' => $categoryName]);
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
+        $category = $this->getDoctrine()->getRepository(Category::class)
+                                        ->findOneBy(['name' => $categoryName]);
+        $articles = $this->getDoctrine()->getRepository(Article::class)
+                                        ->findBy(['category' => $category], ['id' => 'DESC'], 3);
+        
         if (!$category) {
             throw $this->createNotFoundException(
                 'No article with ' . $categoryName . ' name, found in category\'s table.'
