@@ -15,23 +15,7 @@ class Article
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-
+//getter
     /**
      * @return int|null
      */
@@ -40,6 +24,13 @@ class Article
         return $this->id;
     }
 
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+//getters and setters
     /**
      * @return string|null
      */
@@ -58,6 +49,13 @@ class Article
         return $this;
     }
 
+
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+//getters and setters
     /**
      * @return string|null
      */
@@ -76,7 +74,15 @@ class Article
         return $this;
     }
 
+
+
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+//getters and setters
+     /**
      * @return Category|null
      */
     public function getCategory(): ?Category
