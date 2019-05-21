@@ -50,9 +50,7 @@ class BlogController extends AbstractController
      *
      * @param string $slug The slugger
      *
-     * @Route("/blog/{slug<^[a-z0-9-]+$>}",
-     *     defaults={"slug" = null},
-     *     name="blog_show")
+     * @Route("/blog/{slug<^[a-z0-9-]+$>}", defaults={"slug" = null}, name="blog_show")
      *  @return Response A response instance
      */
     public function show(?string $slug) : Response
@@ -67,9 +65,8 @@ class BlogController extends AbstractController
             ' ', ucwords(trim(strip_tags($slug)), "-")
         );
 
-        $article = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findOneBy(['title' => mb_strtolower($slug)]);
+        $article = $this->getDoctrine()->getRepository(Article::class)
+                                        ->findOneBy(['title' => mb_strtolower($slug)]);
 
         if (!$article) {
             throw $this->createNotFoundException(
