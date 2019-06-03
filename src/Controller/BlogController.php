@@ -103,11 +103,6 @@ class BlogController extends AbstractController
                         ->findBy(['category' => $category],
                                 ['id' => 'DESC'], 3);
         
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No article with ' . $categoryName . ' name, found in category\'s table.'
-            );
-        }
         return $this->render(
             '/blog/category.html.twig',
             [
