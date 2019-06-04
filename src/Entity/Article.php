@@ -59,12 +59,16 @@ class Article
 
     public function getCategory(): ?Category
     {
-        return $this->Category;
+        return $this->category;
     }
 
+    /**
+     * @param Category|null $Category
+     * @return Article
+     */
     public function setCategory(?Category $Category): self
     {
-        $this->Category = $Category;
+        $this->category = $Category;
 
         return $this;
     }
