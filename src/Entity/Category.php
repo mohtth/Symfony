@@ -2,11 +2,9 @@
 
 namespace App\Entity;
 
-use App\Entity\Article;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -19,84 +17,67 @@ class Category
      * @ORM\Column(type="integer")
      */
     private $id;
-//getter
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
-//getters and setters
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-    /**
-     * @param string $name
-     * @return Category
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */
-    private $articles;
+    private $Articles;
+
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->Articles = new ArrayCollection();
     }
-//getter
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Article[]
      */
     public function getArticles(): Collection
     {
-        return $this->articles;
+        return $this->Articles;
     }
-    /**
-     * param Article $article
-     * @return Category
-     */
+
     public function addArticle(Article $article): self
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
+        if (!$this->Articles->contains($article)) {
+            $this->Articles[] = $article;
             $article->setCategory($this);
         }
 
         return $this;
     }
-    /**
-     * @param Article $article
-     * @return Category
-     */
-    public function removeArticles(Article $article): self
+
+    public function removeArticle(Article $article): self
     {
-        if ($this->articles->contains($article)) {
-            $this->articles->removeElement($article);
+        if ($this->Articles->contains($article)) {
+            $this->Articles->removeElement($article);
             // set the owning side to null (unless already changed)
             if ($article->getCategory() === $this) {
                 $article->setCategory(null);
             }
         }
+
         return $this;
     }
-
 }

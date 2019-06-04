@@ -1,1 +1,13 @@
-{# templates/blog/index.html.twig #}{% extends 'base.html.twig' %}{% block title %}Some articles{% endblock %}{% block body %}    <h1>3 articles from the category : </h1>    {% for article in articles |slice(0, 3) %}        <div>            <h2>{{ article.id }} / {{ article.title }} - Category : {{ article.category.name }}</h2>            <p>{{ article.content }}</p>        </div>    {% else %}        Aucun article trouvé.    {% endfor %}    <a href="{{ path('app_index') }}">        Back to homepage.    </a>{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}CATEGORY{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>{{ category.name }}</h1>
+        <ul>
+            {% for article in articles %}
+                <li>{{ article.content }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

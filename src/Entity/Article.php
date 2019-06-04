@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
@@ -15,88 +12,60 @@ class Article
      * @ORM\Column(type="integer")
      */
     private $id;
-//getter
+
     /**
-     * @return int|null
+     * @ORM\Column(type="string", length=100)
      */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $Content;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="Articles")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
-//getters and setters
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     * @return Article
-     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
-
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
-//getters and setters
-    /**
-     * @return string|null
-     */
     public function getContent(): ?string
     {
-        return $this->content;
+        return $this->Content;
     }
 
-    /**
-     * @param string $content
-     * @return Article
-     */
-    public function setContent(string $content): self
+    public function setContent(string $Content): self
     {
-        $this->content = $content;
+        $this->Content = $Content;
+
         return $this;
     }
 
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $category;
-//getters and setters
-     /**
-     * @return Category|null
-     */
     public function getCategory(): ?Category
     {
-        return $this->category;
+        return $this->Category;
     }
 
-    /**
-     * @param Category|null $category
-     * @return Article
-     */
-    public function setCategory(?Category $category): self
+    public function setCategory(?Category $Category): self
     {
-        $this->category = $category;
+        $this->Category = $Category;
+
         return $this;
     }
 }
